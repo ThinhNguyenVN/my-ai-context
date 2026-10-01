@@ -21,3 +21,5 @@ Update không nâng upstream hay chạy Git. State/backups ở ~/.local/state/my
 Sau chuyển repo chính, preview/update để refresh đường dẫn. Máy mới có path riêng. Đồng bộ source và áp dụng config là hai bước; không có auto-sync nền ở v0.1.0.
 
 Khi sửa installer: python3 -m unittest discover -s tests -v. Fixture ở work/, không đụng global config. Khi chỉ sửa docs, không chạy bộ test theo nghi thức.
+
+Entrypoint portable: context.sh ở gốc repo, tự tìm đường dẫn của chính script; có thể gọi từ cwd khác. README dùng lệnh tương đối trong checkout. Sau chuyển primary repo, preview/update để refresh đường dẫn đã render; không cần sửa path trong script.

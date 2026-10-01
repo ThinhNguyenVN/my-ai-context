@@ -104,4 +104,31 @@ class InstallerTests(unittest.TestCase):
         self.run_cli('rollback','--apply')
         self.assertTrue((self.home/'.claude/skills/my-research/SKILL.md').exists())
         self.assertEqual(self.state()['targets'],['claude'])
+    def test_wrapper_outside_repo_and_space_in_path(self):
+        repo=Path(self.temp.name)/'Project with spaces'
+        shutil.copytree(ROOT,repo,ignore=shutil.ignore_patterns('.git','work','__pycache__'))
+        wrapper=repo/'context.sh'
+        result=subprocess.run(['sh',str(wrapper),'status','--home',str(self.home)],cwd=self.temp.name,text=True,capture_output=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(json.loads(result.stdout)['repo'],str(repo))
+    def test_relocation_refreshes_installed_paths(self):
+        repo=Path(self.temp.name)/'first location'
+        shutil.copytree(ROOT,repo,ignore=shutil.ignore_patterns('.git','work','__pycache__'))
+        def run(location,*args):
+            result=subprocess.run(['sh',str(location/'context.sh'),*args,'--home',str(self.home)],cwd=self.temp.name,text=True,capture_output=True)
+            self.assertEqual(result.returncode,0,result.stderr)
+        run(repo,'install','--targets','claude,codex','--apply')
+        moved=Path(self.temp.name)/'new location';repo.rename(moved)
+        run(moved,'update','--apply')
+        for relative in ['.claude/CLAUDE.md','.codex/AGENTS.md','.agents/skills/my-context-maintenance/SKILL.md']:
+            data=(self.home/relative).read_text()
+            self.assertIn(str(moved),data);self.assertNotIn(str(repo),data)
+        run(moved,'status')
+    def test_shortcuts_install_status_update(self):
+        for name in ['my-install','my-status','my-update']:
+            result=subprocess.run(['sh',str(ROOT/name),'--home',str(self.home)],cwd=self.temp.name,text=True,capture_output=True)
+            self.assertEqual(result.returncode,0,result.stderr)
+            if name=='my-install':self.assertTrue((self.home/'.codex/AGENTS.md').exists())
+            if name=='my-status':self.assertEqual(len(json.loads(result.stdout)['installed_targets']),4)
+        self.assertEqual(len(self.state()['history']),1)
 if __name__=='__main__':unittest.main()

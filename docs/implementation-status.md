@@ -23,3 +23,5 @@
 This is a working first release of local skills/installer, not verified end-to-end coverage of all apps.
 
 Skill metadata and installed reference rendering validated by installer/fixture checks. Bundled quick_validate.py could not run because PyYAML is absent; no package installed solely for this check. Local skill frontmatter intentionally uses JSON-quoted strings valid in YAML and is validated without dependencies.
+
+Portable entrypoint: context.sh added at repo root. All 14 fixture checks passed, including invoking from a different working directory with spaces in the repo path and moving the checkout then refreshing installed paths. README now uses commands run inside the repo and describes private clone/setup on another machine.
