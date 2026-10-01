@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "version": "0.1.0",
+  "skills": [
+    {
+      "id": "my-thinh-context",
+      "path": "skills/my-thinh-context",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-requirement-interview",
+      "path": "skills/my-requirement-interview",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-research",
+      "path": "skills/my-research",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-feature-workflow",
+      "path": "skills/my-feature-workflow",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-figma-ui",
+      "path": "skills/my-figma-ui",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-risk-based-verification",
+      "path": "skills/my-risk-based-verification",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-backend-review",
+      "path": "skills/my-backend-review",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-context-maintenance",
+      "path": "skills/my-context-maintenance",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "figma",
+      "source": "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+      "mode": "manual",
+      "status": "not-installed-by-playbook"
+    },
+    {
+      "id": "frontend-design",
+      "source": "https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design",
+      "mode": "manual",
+      "status": "pending-audit"
+    }
+  ]
+}

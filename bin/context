@@ -1,0 +1,228 @@
+#!/usr/bin/env python3
+"""Manage approved local skills. Preview by default; never executes Git/vendor code."""
+import argparse, base64, hashlib, json, os, sys, tempfile
+from pathlib import Path
+from datetime import datetime, timezone
+
+ROOT = Path(__file__).resolve().parent.parent
+START = "<!-- my-ai-context:start -->"
+END = "<!-- my-ai-context:end -->"
+TARGETS = {"claude": (".claude/CLAUDE.md", ".claude/skills"),
+           "codex": (".codex/AGENTS.md", ".agents/skills"),
+           "cursor": (None, ".agents/skills"),
+           "copilot": (None, ".agents/skills")}
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+def read(path):
+    if path.is_symlink():
+        raise ValueError(f"Symlink destination requires manual review: {path}")
+    if path.exists() and not path.is_file():
+        raise ValueError(f"Expected regular file: {path}")
+    return path.read_bytes() if path.exists() else None
+
+def safe_path(home, rel):
+    path = home / rel
+    if not path.resolve().is_relative_to(home.resolve()):
+        raise ValueError(f"Path escapes selected home: {path}")
+    for parent in [path, *path.parents]:
+        if parent == home: break
+        if parent.is_symlink(): raise ValueError(f"Symlink needs manual review: {parent}")
+    return path
+
+def atom(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, name = tempfile.mkstemp(prefix=".context-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "wb") as f: f.write(data)
+        os.chmod(name, path.stat().st_mode & 0o777 if path.exists() else 0o600)
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name): os.unlink(name)
+
+def encode(data):
+    return None if data is None else base64.b64encode(data).decode()
+
+def decode(data):
+    return None if data is None else base64.b64decode(data)
+
+def render(path):
+    text = path.read_text()
+    text = text.replace("@REPO@", str(ROOT))
+    if text.strip() == "@PROFILE@": text = (ROOT / "profile/thinh.md").read_text()
+    if text.startswith("@WORKFLOW:"):
+        filename = text.strip()[10:-1]
+        heading = {"feature.md":"Feature (cá nhân và công ty)","research.md":"Research",
+                   "ui.md":"UI theo Figma","verification.md":"Kiểm chứng"}[filename]
+        wf = (ROOT / "workflows/working-together.md").read_text()
+        body = wf.split("\n## " + heading + "\n", 1)[1].split("\n## ", 1)[0]
+        text = "# " + heading + "\n" + body
+    return text.encode()
+
+def load_manifest():
+    m = json.loads((ROOT / "manifest.json").read_text())
+    if m.get("schema") != 1: raise ValueError("Unsupported manifest schema")
+    seen = set()
+    for skill in m["skills"]:
+        sid = skill["id"]
+        if not sid.startswith("my-") or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-" for c in sid):
+            raise ValueError("Invalid local skill ID")
+        if sid in seen: raise ValueError("Duplicate skill ID")
+        seen.add(sid)
+        src = ROOT / skill["path"]
+        if not src.resolve().is_relative_to(ROOT): raise ValueError("Source outside repo")
+        if src.is_symlink() or not (src / "SKILL.md").is_file(): raise ValueError("Invalid skill source")
+        lines = (src / "SKILL.md").read_text().splitlines()
+        if not lines or lines[0] != "---" or "---" not in lines[1:]:
+            raise ValueError("Skill frontmatter missing")
+        metadata = dict(line.split(": ",1) for line in lines[1:lines.index("---",1)])
+        if metadata.get("name") != sid or not json.loads(metadata.get("description", '""')):
+            raise ValueError("Invalid skill metadata")
+        for p in src.rglob("*"):
+            if p.is_symlink(): raise ValueError("Source symlink not supported")
+    return m
+
+def desired(home, targets, manifest):
+    result = {}
+    core = (ROOT / "context/core.md").read_text().replace(" — DRAFT", "")
+    core = core.replace("`profile/thinh.md`", f"`{ROOT}/profile/thinh.md`")
+    core = core.replace("`workflows/working-together.md`", f"`{ROOT}/workflows/working-together.md`")
+    core = core.replace("`skills/catalog.md`", f"`{ROOT}/skills/catalog.md`")
+    block = f"{START}\nVersion: {manifest['version']}\nCanonical repo: {ROOT}\n{core}\n{END}"
+    for target in targets:
+        instruction, skillroot = TARGETS[target]
+        if target == "codex" and os.environ.get("CODEX_HOME") and home == Path.home():
+            raise ValueError("Custom CODEX_HOME detected; review mapping before installing")
+        if target == "codex" and (home / ".codex/AGENTS.override.md").exists():
+            raise ValueError("AGENTS.override.md shadows global guidance; manual review required")
+        if instruction:
+            path = safe_path(home, instruction)
+            existing = read(path)
+            text = existing.decode() if existing is not None else ""
+            if START in text or END in text:
+                if text.count(START)!=1 or text.count(END)!=1 or text.index(START)>text.index(END):
+                    raise ValueError("Malformed managed instruction block")
+                a,b = text.index(START),text.index(END)+len(END)
+                text = text[:a]+block+text[b:]
+            else:
+                text += ("\n\n" if text else "") + block + "\n"
+            result[str(path)] = text.encode()
+        for skill in manifest["skills"]:
+            source = ROOT / skill["path"]
+            for p in sorted(source.rglob("*")):
+                if p.is_file():
+                    dest = safe_path(home, str(Path(skillroot)/skill["id"]/p.relative_to(source)))
+                    result[str(dest)] = render(p)
+    return result
+
+def state_read(path):
+    data = read(path)
+    return json.loads(data) if data else {"schema":1,"files":{},"history":[],"targets":[]}
+
+def plan_changes(want, state, command):
+    changes, conflicts = [], []
+    for name,new in want.items():
+        old = read(Path(name)); owned = state["files"].get(name)
+        if owned:
+            expected = owned["hash"]
+            if (sha(old) if old is not None else None) != expected:
+                conflicts.append(name + " (managed file changed or removed)"); continue
+        elif old is not None:
+            # Only instruction files may be adopted by appending a managed block.
+            if Path(name).name not in ("CLAUDE.md","AGENTS.md") or START.encode() in old:
+                conflicts.append(name + " (unmanaged file exists)"); continue
+        if old != new: changes.append((name,old,new))
+    return changes,conflicts
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("command",choices=["status","install","update","uninstall","rollback"])
+    parser.add_argument("--targets",default=None,help="Comma separated: claude,codex,cursor,copilot")
+    parser.add_argument("--home",type=Path,default=Path.home(),help="Target home; fixtures allowed")
+    group=parser.add_mutually_exclusive_group(); group.add_argument("--apply",action="store_true");group.add_argument("--dry-run",action="store_true")
+    args=parser.parse_args(); home=args.home.expanduser().absolute()
+    state_path=safe_path(home,".local/state/my-ai-context/state.json")
+    state=state_read(state_path); manifest=load_manifest()
+    allowed = [home / ".claude/skills", home / ".agents/skills"]
+    allowed_files = [home / ".claude/CLAUDE.md", home / ".codex/AGENTS.md"]
+    for name in state["files"]:
+        path = Path(name)
+        if path not in allowed_files and not any(path.is_relative_to(base) for base in allowed):
+            raise ValueError("Invalid managed state path")
+        safe_path(home, str(path.relative_to(home)))
+    targets=args.targets.split(",") if args.targets else (state["targets"] or ["claude","codex","cursor","copilot"])
+    if len(set(targets))!=len(targets) or any(t not in TARGETS for t in targets): raise ValueError("Invalid targets")
+    if args.command=="status":
+        if args.apply: raise ValueError("status is read-only")
+        want=desired(home,targets,manifest)
+        conflicts=[]
+        for name,meta in state["files"].items():
+            data=read(Path(name))
+            if (sha(data) if data is not None else None)!=meta["hash"]: conflicts.append(name)
+        print(json.dumps({"repo":str(ROOT),"source_version":manifest["version"],"installed_targets":state["targets"],
+           "managed_files":len(state["files"]),"drift":conflicts,
+           "pending_source_changes":[name for name,data in want.items() if name in state["files"] and sha(data)!=state["files"][name]["hash"]],
+           "runtime":"Not verified by file installation; follow adapters/README.md",
+           "manual":["Cursor User Rules core","Copilot VS Code user instructions core","ChatGPT/Claude chat instructions","Figma/plugin OAuth"]},indent=2,ensure_ascii=False));return
+    if args.command in ("uninstall","rollback") and args.targets:
+        raise ValueError("uninstall/rollback restore full last managed state; do not pass --targets")
+    if args.command=="uninstall":
+        want={name:decode(meta["original"]) for name,meta in state["files"].items()}
+    elif args.command=="rollback":
+        if not state["history"]: raise ValueError("No previous transaction")
+        last=state["history"][-1]
+        want={name:decode(data) for name,data in last["before"].items()}
+    else:
+        # Preserve existing target set on an incremental install/update.
+        targets=sorted(set(targets+state["targets"]))
+        want=desired(home,targets,manifest)
+        # Prune obsolete files belonging to this installer, restoring original if any.
+        for name,meta in state["files"].items():
+            if name not in want: want[name]=decode(meta["original"])
+    changes,conflicts=plan_changes(want,state,args.command)
+    print(json.dumps({"operation":args.command,"apply":args.apply,"targets":targets,"changes":[{"path":n,"action":"delete" if new is None else "write","before":sha(old) if old else None,"after":sha(new) if new else None} for n,old,new in changes],"conflicts":conflicts},indent=2))
+    if conflicts: raise ValueError("Conflicts: nothing applied")
+    if not args.apply or not changes: return
+    state_path.parent.mkdir(parents=True,exist_ok=True)
+    lock=state_path.parent/"apply.lock"
+    try: fd=os.open(lock,os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
+    except FileExistsError: raise ValueError("Another operation/stale lock exists; inspect before retry")
+    os.close(fd)
+    completed=[]
+    try:
+        if state_read(state_path)!=state: raise ValueError("State changed during preview")
+        for name,old,new in changes:
+            if read(Path(name))!=old: raise ValueError("Destination changed during preview")
+        before={n:encode(old) for n,old,new in changes}
+        previous_files=json.loads(json.dumps(state["files"]))
+        previous_targets=list(state["targets"])
+        active_desired = desired(home,targets,manifest) if args.command not in ("uninstall","rollback") else {}
+        for name,old,new in changes:
+            path=Path(name)
+            if new is None: path.unlink(missing_ok=True)
+            else: atom(path,new)
+            completed.append((name,old))
+        if args.command=="rollback":
+            last=state["history"].pop(); state["files"]=last["files"];state["targets"]=last["targets"]
+        else:
+            state["history"].append({"time":datetime.now(timezone.utc).isoformat(),"before":before,"files":previous_files,"targets":previous_targets})
+            if args.command=="uninstall": state["files"]={};state["targets"]=[]
+            else:
+                for name,old,new in changes:
+                    if new is None or name not in active_desired: state["files"].pop(name,None)
+                    else: state["files"][name]={"hash":sha(new),"original":previous_files.get(name,{}).get("original",encode(old))}
+                state["targets"]=targets
+        atom(state_path,(json.dumps(state,indent=2)+"\n").encode())
+        print("Applied. Restart target clients and verify actual loading separately.")
+    except Exception:
+        for name,old in reversed(completed):
+            if old is None: Path(name).unlink(missing_ok=True)
+            else: atom(Path(name),old)
+        raise
+    finally: lock.unlink(missing_ok=True)
+
+if __name__=="__main__":
+    try: main()
+    except (ValueError,OSError,KeyError,json.JSONDecodeError) as error:
+        print("ERROR: "+str(error),file=sys.stderr);sys.exit(1)
