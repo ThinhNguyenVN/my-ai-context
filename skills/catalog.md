@@ -5,6 +5,8 @@
 | Nhóm | Quyết định |
 | --- | --- |
 | Interview requirement, research, feature, kiểm chứng platform | Viết riêng từ workflow đã chốt; entry ngắn, chi tiết đọc theo nhu cầu |
+| `my-code-review` (custom, đã thêm nguồn) | Review code đa ngôn ngữ theo request/spec/context và convention repo, gồm performance risks có căn cứ; thách thức assumption/design; ưu tiên Critical/High/Medium/Low kèm vị trí, tác động và fix; không sửa code nếu chỉ được yêu cầu review; verification tập trung theo rủi ro. Không bắt buộc plan/spec cho mọi review. |
+| `my-code-conventions` (custom, đã thêm nguồn) | Dùng convention theo repo khi review/implement; xem xét performance; tìm khả năng reuse trước khi tạo function/component; chỉ chuyển code business-specific sang generic khi reuse vượt domain; unit test cho tính toán phức tạp, e2e khi cần. Hive UI/design tokens chỉ ưu tiên trong React Native PropertyGuru. |
 | Figma plugin/MCP chính thức | Ưu tiên kiểm chứng kết nối, tích hợp Claude Code/Cursor và công cụ khác theo tài liệu |
 | Vercel React/Next.js và React Native | Tận dụng bản đang có, chọn phiên bản ghim sau khi audit nguồn/compatibility |
 | Composition patterns, web-design-guidelines | Gọi khi thiết kế component/review UI; giữ bản chỉnh sửa địa phương |

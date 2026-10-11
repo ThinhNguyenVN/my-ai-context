@@ -45,6 +45,20 @@
       "activation": "task-specific"
     },
     {
+      "id": "my-code-conventions",
+      "path": "skills/my-code-conventions",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
+      "id": "my-code-review",
+      "path": "skills/my-code-review",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
       "id": "my-backend-review",
       "path": "skills/my-backend-review",
       "source": "local",

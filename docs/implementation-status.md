@@ -2,7 +2,7 @@
 
 ## Implemented and checked
 
-- Version 0.1.0 manifest and 9 local skills: context, interview, research, feature, Figma UI, risk-based verification, backend review, Python backend and context maintenance.
+- Version 0.1.0 manifest; 9 existing local skills were previously implemented and checked. `my-code-review` and `my-code-conventions` are now registered source skills; see pending note below for installer/rendering status.
 - Profile/workflow canonical files rendered into installed references; only relevant skill bodies/references loaded by agent selection.
 - bin/context: status, install, update, uninstall, rollback; dry-run default, explicit apply, backup/history/checksum/lock, unmanaged/drift/symlink refusal, transactional recovery, shared destinations.
 - README update workflow works from any project but targets the primary checkout.
@@ -11,6 +11,9 @@
 - Codex current session subsequently received the installed AGENTS.md core v0.1.0 as instruction context. This verifies core injection on this surface; the current session skill catalog also subsequently lists all 8 my-* skills. Core/catalog discovery verified here; full behavioral pilot remains unverified.
 
 ## Pending, not represented as completed
+
+- `my-code-review` added to the source manifest and catalog. Source registration is present; installer/rendering behavior for the new skill has not been run in this change.
+- `my-code-conventions` added to the source manifest and catalog. Source registration is present; installer/rendering behavior for the new skill has not been run in this change.
 
 - Fresh-session skill discovery and behavioral pilot in each client; Codex core injection already observed. Claude core file installed but runtime loading not yet observed.
 - Cursor/Copilot always-on core via profile UI; desktop/chat integrations remain manual until tested in actual surface.
