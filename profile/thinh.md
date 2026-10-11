@@ -24,18 +24,20 @@ Tin AI như người đồng hành và hướng dẫn: nói thật biết/chưa 
 
 ## Hai môi trường
 
-Mac cá nhân: việc cá nhân và sản phẩm từ idea; các sản phẩm mobile dùng Expo. Workspace chính hiện tại: `/Users/thinhnguyen/Desktop/Project`; repo này ở `my-ai-context`. Đường dẫn phải được ánh xạ riêng trên máy khác, không hardcode thành mặc định mọi máy.
+MacBook Pro cá nhân: việc cá nhân và sản phẩm từ idea; các sản phẩm mobile dùng Expo. Workspace chính hiện tại: `/Users/thinhnguyen/Desktop/Project`; repo này ở `my-ai-context`. Đường dẫn phải được ánh xạ riêng trên máy khác, không hardcode thành mặc định mọi máy.
 
 MacBook Pro công ty: chủ yếu việc công ty, dùng Claude và Copilot; chưa kiểm kê máy đó. Vai trò chủ yếu triển khai feature/sửa lỗi. Đầu vào: ticket, Figma, trao đổi team; có thể thiếu thông tin nên cần làm rõ.
 
 Thịnh cho phép lưu mô tả khái quát sau trong repo private chung, nhưng không code/spec/dữ liệu nội bộ:
 
-| Repo | Vai trò |
-| --- | --- |
-| bds-mobile | React Native consumer và seller, Hive Design |
-| bds-seller-sellernet-next | Next.js seller, Hive Design |
-| bds-seller-experience-sellernet-utils | Helper function chung |
-| bds-seller-experience-sellernet-rtk | Redux Toolkit/RTK Query cho web/mobile |
+
+| Repo                                  | Vai trò                                      |
+| ------------------------------------- | -------------------------------------------- |
+| bds-mobile                            | React Native consumer và seller, Hive Design |
+| bds-seller-sellernet-next             | Next.js seller, Hive Design                  |
+| bds-seller-experience-sellernet-utils | Helper function chung                        |
+| bds-seller-experience-sellernet-rtk   | Redux Toolkit/RTK Query cho web/mobile       |
+
 
 Sản phẩm tìm kiếm và quản lý tin đăng bất động sản, website batdongsan.com.vn. Stack TypeScript, Next.js, React Native. Hỗ trợ cần nhất: phân tích requirement và lỗi/ảnh hưởng giữa repo. Platform: web desktop/mobile, iOS/Android; chỉ kiểm tra các platform task ảnh hưởng. Chi tiết convention/test/API phải đọc tại dự án, không suy từ profile.
 
@@ -45,17 +47,19 @@ Thịnh xác nhận bổ sung ngày 2026-10-01: phát triển backend bằng Nes
 
 ## Nền tảng nghề nghiệp từ portfolio
 
-Nguồn: https://portfolio-thinh.netlify.app/ — đọc ngày 2026-10-01. Đây là thông tin tự giới thiệu công khai; mốc và công nghệ lịch sử không tự trở thành convention/stack hiện tại. Khi khác với interview hiện tại, ưu tiên thông tin Thịnh vừa xác nhận hoặc hỏi khi ảnh hưởng task.
+Nguồn: [https://portfolio-thinh.netlify.app/](https://portfolio-thinh.netlify.app/) — đọc ngày 2026-10-01. Đây là thông tin tự giới thiệu công khai; mốc và công nghệ lịch sử không tự trở thành convention/stack hiện tại. Khi khác với interview hiện tại, ưu tiên thông tin Thịnh vừa xác nhận hoặc hỏi khi ảnh hưởng task.
 
 Portfolio giới thiệu Senior Mobile Developer, hơn 10 năm software engineering và hơn 6 năm chuyên mobile; bắt đầu làm phần mềm từ 2011. Kinh nghiệm gồm full-stack, iOS native và React Native, qua bất động sản, giao đồ ăn, bán lẻ, CRM và sản phẩm enterprise. Chú trọng architecture dễ bảo trì, responsive UI, performance và phối hợp product/design/QA. Không cần giải thích kiến thức lập trình cơ bản; độ sâu điều chỉnh theo chủ đề.
 
-| Giai đoạn trên portfolio | Vai trò và kinh nghiệm liên quan |
-| --- | --- |
-| 02/2024–hiện tại theo portfolio | Software Engineer, PropertyGuru; seller team Batdongsan.com.vn, React Native/web, tạo/sửa/quản lý/đăng lại tin và thanh toán |
-| 05/2023–01/2024 | Senior Mobile Developer, BAEMIN Vietnam; order/tracking và chat khách hàng–tài xế với Sendbird |
-| 2022–2023 | Senior Mobile Developer/Mobile Lead, Fram^; AllEasy Go consumer/driver; tự xây Builderful với React Native/GraphQL/Apollo |
-| 2017–2022 | Mobile Developer, Active Media; Sunnypoint white-label loyalty/CRM, cấu hình và script tạo app tái sử dụng |
-| 2011–2017 | Full-Stack Developer, FOIS Vietnam; SmilePOS gồm SQL Server, ASP.NET web services và Objective-C iPad/iPhone, làm với team Nhật |
+
+| Giai đoạn trên portfolio        | Vai trò và kinh nghiệm liên quan                                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| 02/2024–hiện tại theo portfolio | Software Engineer, PropertyGuru; seller team Batdongsan.com.vn, React Native/web, tạo/sửa/quản lý/đăng lại tin và thanh toán    |
+| 05/2023–01/2024                 | Senior Mobile Developer, BAEMIN Vietnam; order/tracking và chat khách hàng–tài xế với Sendbird                                  |
+| 2022–2023                       | Senior Mobile Developer/Mobile Lead, Fram^; AllEasy Go consumer/driver; tự xây Builderful với React Native/GraphQL/Apollo       |
+| 2017–2022                       | Mobile Developer, Active Media; Sunnypoint white-label loyalty/CRM, cấu hình và script tạo app tái sử dụng                      |
+| 2011–2017                       | Full-Stack Developer, FOIS Vietnam; SmilePOS gồm SQL Server, ASP.NET web services và Objective-C iPad/iPhone, làm với team Nhật |
+
 
 Học Software Engineering tại NIIT Hoa Sen, tốt nghiệp 2015 với Outstanding recognition theo portfolio. Ngôn ngữ giao tiếp được liệt kê: English, Japanese; mức thành thạo chưa xác nhận, không mặc định dùng thay tiếng Việt.
 
@@ -70,3 +74,4 @@ MyRN được mô tả là Expo platform kit dùng chung iOS/Android/Web: shared
 - Phân biệt vai trò công ty hiện tại do interview mô tả với năng lực và lịch sử nghề nghiệp rộng hơn trên portfolio; không dùng nhãn senior để giả định biết mọi công nghệ.
 - Kinh nghiệm white-label/shared architecture hữu ích khi bàn tái sử dụng và universal app; không tự đưa pattern đó vào dự án đã có convention khác.
 - Không sao chép thông tin liên hệ, chỉ số marketing hay toàn bộ case study vào context chung vì không giúp task hiện tại.
+

@@ -33,4 +33,12 @@ Trước vendoring: đọc toàn bộ file liên quan, kiểm tra script/network
 
 Học backend: áp dụng cách giải thích trong profile, không tạo một skill dài lặp profile. Có thể gộp các custom skill khi audit thấy trigger trùng; không nạp cả nhóm mỗi task.
 
-Nguồn: https://github.com/Kadajett/agent-nestjs-skills ; https://docs.nestjs.com/fundamentals/testing ; https://docs.nestjs.com/security/authentication ; https://www.prisma.io/docs/ai/tools/skills . Nguồn NestJS/Prisma là reference để xây/audit, không giả là các package custom đã tồn tại.
+Nguồn NestJS/Prisma: https://github.com/Kadajett/agent-nestjs-skills ; https://docs.nestjs.com/fundamentals/testing ; https://docs.nestjs.com/security/authentication ; https://www.prisma.io/docs/ai/tools/skills . Dùng để xây/audit, không giả là các package custom đã tồn tại.
+
+## Nhóm Python/FastAPI — 2026-10-01
+
+Duyệt hướng custom only (không vendor pack FastAPI/DDD). Skill user-level, bật khi repo là Python; không thay `my-backend-review` (NestJS).
+
+| Skill | Nội dung và điều kiện |
+| --- | --- |
+| `my-python-backend` (custom, đã thêm nguồn) | FastAPI router mỏng, service độc lập HTTP, client `httpx`, SQLAlchemy 2 async, Alembic, pytest mock HTTP, `uv`/`ruff`. Đọc convention/OpenSpec repo trước. Không áp DDD, repository hierarchy, JWT, queue hay đổi package manager. |

@@ -52,6 +52,13 @@
       "activation": "task-specific"
     },
     {
+      "id": "my-python-backend",
+      "path": "skills/my-python-backend",
+      "source": "local",
+      "license": "private-personal",
+      "activation": "task-specific"
+    },
+    {
       "id": "my-context-maintenance",
       "path": "skills/my-context-maintenance",
       "source": "local",

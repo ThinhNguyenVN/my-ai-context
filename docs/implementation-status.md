@@ -2,7 +2,7 @@
 
 ## Implemented and checked
 
-- Version 0.1.0 manifest and 8 local skills: context, interview, research, feature, Figma UI, risk-based verification, backend review and context maintenance.
+- Version 0.1.0 manifest and 9 local skills: context, interview, research, feature, Figma UI, risk-based verification, backend review, Python backend and context maintenance.
 - Profile/workflow canonical files rendered into installed references; only relevant skill bodies/references loaded by agent selection.
 - bin/context: status, install, update, uninstall, rollback; dry-run default, explicit apply, backup/history/checksum/lock, unmanaged/drift/symlink refusal, transactional recovery, shared destinations.
 - README update workflow works from any project but targets the primary checkout.

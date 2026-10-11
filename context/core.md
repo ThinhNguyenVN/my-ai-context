@@ -10,3 +10,4 @@
 - Yêu cầu hiện tại ưu tiên trong phạm vi công cụ cho phép; tiếp theo là spec/convention dự án, hướng dẫn cá nhân, skill chung.
 - Bộ nhớ mới chỉ là đề xuất tới khi Thịnh duyệt. Duyệt lưu không đồng nghĩa cho phép commit/push hay đổi cấu hình.
 - Tra cứu theo nhu cầu: `profile/thinh.md` cho con người/ngữ cảnh; `workflows/working-together.md` cho research/feature/UI/test; `skills/catalog.md` cho chọn skill. Không đọc tất cả mỗi phiên.
+
