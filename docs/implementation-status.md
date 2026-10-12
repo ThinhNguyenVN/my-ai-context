@@ -12,7 +12,7 @@
 
 ## Pending, not represented as completed
 
-- `my-code-review` added to the source manifest and catalog. Source registration is present; installer/rendering behavior for the new skill has not been run in this change.
+- `my-code-review` source now requires a brief PR summary and explicit user request before running unit/e2e or other test suites. Installer/rendering behavior for this update has not been run.
 - `my-code-conventions` added to the source manifest and catalog. Source registration is present; installer/rendering behavior for the new skill has not been run in this change.
 
 - Fresh-session skill discovery and behavioral pilot in each client; Codex core injection already observed. Claude core file installed but runtime loading not yet observed.

@@ -5,7 +5,7 @@
 | Nhóm | Quyết định |
 | --- | --- |
 | Interview requirement, research, feature, kiểm chứng platform | Viết riêng từ workflow đã chốt; entry ngắn, chi tiết đọc theo nhu cầu |
-| `my-code-review` (custom, đã thêm nguồn) | Chỉ khi được nhờ review diff/PR/implementation. Soi thay đổi, caller dùng chung, và feature/logic cũ bị ảnh hưởng; bug cũ không liên quan để ngoài scope. Critical/High/Medium/Low kèm vị trí, tác động và fix; không sửa code nếu chỉ được yêu cầu review; nêu check nhỏ nhất, không biến thành test plan. Không bắt buộc plan/spec cho mọi review. |
+| `my-code-review` (custom, đã thêm nguồn) | Chỉ khi được nhờ review diff/PR/implementation. Soi thay đổi, caller dùng chung, và feature/logic cũ bị ảnh hưởng; bug cũ không liên quan để ngoài scope. Mở đầu bằng tóm tắt ngắn gọn PR; Critical/High/Medium/Low kèm vị trí, tác động và fix; không sửa code nếu chỉ được yêu cầu review; không chạy unit/e2e hay test suite khi chưa được yêu cầu. Không bắt buộc plan/spec cho mọi review. |
 | `my-code-conventions` (custom, đã thêm nguồn) | Khi đang viết hoặc sửa code, không phải workflow review hay cổng duyệt plan. Trước khi sửa logic/component/nhánh dùng chung, tìm caller và giữ behavior cũ nếu request không đổi. Convention theo repo; performance khi có tác động cụ thể; reuse trước khi tạo function/component; chỉ chuyển sang generic khi reuse vượt domain; unit test cho tính toán phức tạp, e2e khi cần. Hive UI/design tokens cho project PropertyGuru đã dùng Hive, cả web và mobile. |
 | Figma plugin/MCP chính thức | Ưu tiên kiểm chứng kết nối, tích hợp Claude Code/Cursor và công cụ khác theo tài liệu |
 | Vercel React/Next.js và React Native | Tận dụng bản đang có, chọn phiên bản ghim sau khi audit nguồn/compatibility |
