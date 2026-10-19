@@ -33,6 +33,7 @@ Thịnh cho phép lưu mô tả khái quát sau trong repo private chung, nhưng
 
 | Repo                                  | Vai trò                                      |
 | ------------------------------------- | -------------------------------------------- |
+| bds-fe-portal                         | Nx/pnpm monorepo frontend: Expo mobile, Next.js seller/consumer web, shared Hive UI/pages/state. Xem [project brief](projects/bds-fe-portal.md). |
 | bds-mobile                            | React Native consumer và seller, Hive Design |
 | bds-seller-sellernet-next             | Next.js seller, Hive Design                  |
 | bds-seller-experience-sellernet-utils | Helper function chung                        |
