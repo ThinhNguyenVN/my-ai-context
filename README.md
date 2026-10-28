@@ -63,6 +63,11 @@ Chạy trong thư mục my-ai-context:
 ./my-status     # Xem trạng thái
 ./my-install    # Cài lần đầu trên máy
 ./my-update     # Cài/cập nhật theo nội dung repo hiện tại
+./my-plugin     # Build file .plugin cho Claude Desktop/Cowork (xem bên dưới)
 ```
 
 Chuyển folder repo: chạy my-update tại vị trí mới để cập nhật đường dẫn đã cài.
+
+## Claude Desktop / Cowork
+
+Cowork không đọc `~/.claude`, nên cần plugin. Sau khi sửa skill, chạy `./my-plugin` để build `work/cowork-plugin/my-ai-context.plugin` (cùng nguồn và cách render với my-update, chỉ ghi đúng file này, không đụng `~/.claude`). Cài file này trong Cowork (bước bấm cài là thủ công) và tăng `version` trong `manifest.json` khi skill đổi. Trong Claude Desktop có thể nhờ AI chạy lệnh rồi gửi file.

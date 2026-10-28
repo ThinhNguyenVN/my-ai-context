@@ -131,4 +131,18 @@ class InstallerTests(unittest.TestCase):
             if name=='my-install':self.assertTrue((self.home/'.codex/AGENTS.md').exists())
             if name=='my-status':self.assertEqual(len(json.loads(result.stdout)['installed_targets']),4)
         self.assertEqual(len(self.state()['history']),1)
+    def test_build_plugin_renders_and_touches_nothing_else(self):
+        import zipfile
+        out=Path(self.temp.name)/'p'/'my-ai-context.plugin'
+        self.run_cli('build-plugin','--out',str(out))
+        self.assertEqual(list(self.home.iterdir()),[])
+        z=zipfile.ZipFile(out);names=z.namelist()
+        self.assertIn('.claude-plugin/plugin.json',names);self.assertIn('skills/my-core/SKILL.md',names)
+        self.assertEqual(len([n for n in names if n.endswith('/SKILL.md')]),len(json.loads((ROOT/'manifest.json').read_text())['skills'])+1)
+        for n in names:
+            text=z.read(n).decode()
+            for token in ('@PROFILE@','@WORKFLOW:','@REPO@',str(ROOT)):self.assertNotIn(token,text,n)
+        self.run_cli('build-plugin','--apply',ok=False)
+        result=subprocess.run(['sh',str(ROOT/'my-plugin'),'--out',str(out)],cwd=self.temp.name,text=True,capture_output=True)
+        self.assertEqual(result.returncode,0,result.stderr)
 if __name__=='__main__':unittest.main()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Manage approved local skills. Preview by default; never executes Git/vendor code."""
-import argparse, base64, hashlib, json, os, sys, tempfile
+import argparse, base64, hashlib, json, os, sys, tempfile, zipfile
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -47,9 +47,11 @@ def encode(data):
 def decode(data):
     return None if data is None else base64.b64decode(data)
 
-def render(path):
+REPO_ANYWHERE = "the configured primary my-ai-context checkout on this machine (ask the user for its path if unavailable)"
+
+def render(path, portable=False):
     text = path.read_text()
-    text = text.replace("@REPO@", str(ROOT))
+    text = text.replace("@REPO@", REPO_ANYWHERE if portable else str(ROOT))
     if text.strip() == "@PROFILE@": text = (ROOT / "profile/thinh.md").read_text()
     if text.startswith("@WORKFLOW:"):
         filename = text.strip()[10:-1]
@@ -116,6 +118,28 @@ def desired(home, targets, manifest):
                     result[str(dest)] = render(p)
     return result
 
+def build_plugin(manifest, out):
+    """Build a Cowork .plugin (zip) from the same sources the installer uses. Writes only `out`."""
+    files = {".claude-plugin/plugin.json": json.dumps({
+        "name": "my-ai-context", "version": manifest["version"],
+        "description": "Personal skills and workflows built from the my-ai-context repo. Do not edit here; edit the repo and rebuild.",
+        "author": {"name": "Thịnh Nguyễn"}}, ensure_ascii=False, indent=2).encode()}
+    core = (ROOT / "context/core.md").read_text().replace(" — DRAFT", "").strip()
+    core = (core.replace("`profile/thinh.md`", "the my-thinh-context skill")
+                .replace("`workflows/working-together.md`", "the my-feature-workflow, my-research, my-figma-ui and my-risk-based-verification skills")
+                .replace("`skills/catalog.md`", "the skill list"))
+    desc = json.dumps("Core collaboration rules for working with Thịnh. Load at the start of any conversation with Thịnh (tone, language, discussion vs implement, no commit/branch, minimal testing).", ensure_ascii=False)
+    files["skills/my-core/SKILL.md"] = f"---\nname: my-core\ndescription: {desc}\n---\n\n{core}\n".encode()
+    for skill in manifest["skills"]:
+        source = ROOT / skill["path"]
+        for p in sorted(source.rglob("*")):
+            if p.is_file(): files[f"skills/{skill['id']}/{p.relative_to(source)}"] = render(p, portable=True)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, data in sorted(files.items()): z.writestr(name, data)
+    return {"plugin": str(out), "version": manifest["version"], "files": len(files),
+            "next": "Install the .plugin in Cowork (manual click); bump manifest version when skills change."}
+
 def state_read(path):
     data = read(path)
     return json.loads(data) if data else {"schema":1,"files":{},"history":[],"targets":[]}
@@ -137,11 +161,15 @@ def plan_changes(want, state, command):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command",choices=["status","install","update","uninstall","rollback"])
+    parser.add_argument("command",choices=["status","install","update","uninstall","rollback","build-plugin"])
     parser.add_argument("--targets",default=None,help="Comma separated: claude,codex,cursor,copilot")
     parser.add_argument("--home",type=Path,default=Path.home(),help="Target home; fixtures allowed")
+    parser.add_argument("--out",type=Path,default=ROOT/"work/cowork-plugin/my-ai-context.plugin",help="build-plugin output file")
     group=parser.add_mutually_exclusive_group(); group.add_argument("--apply",action="store_true");group.add_argument("--dry-run",action="store_true")
     args=parser.parse_args(); home=args.home.expanduser().absolute()
+    if args.command=="build-plugin":
+        if args.apply or args.targets: raise ValueError("build-plugin takes only --out")
+        print(json.dumps(build_plugin(load_manifest(),args.out.expanduser().absolute()),indent=2,ensure_ascii=False));return
     state_path=safe_path(home,".local/state/my-ai-context/state.json")
     state=state_read(state_path); manifest=load_manifest()
     allowed = [home / ".claude/skills", home / ".agents/skills"]

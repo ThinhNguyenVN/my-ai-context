@@ -8,7 +8,7 @@ Version 0.1.0 — 2026-10-01. File installer tested in fixtures and applied on p
 | Codex | Core in `~/.codex/AGENTS.md`, skills in `~/.agents/skills`; refuse existing override/custom CODEX_HOME until mapping reviewed | New session in real repo, check loaded instruction sources/skill catalog, test discussion vs implementation boundary |
 | Cursor local | my-* skills in shared `~/.agents/skills`; core via User Rules UI | Customize → Rules: append core below without replacing existing rules; verify in fresh Agent chat and skill list |
 | Copilot VS Code | my-* skills shared `~/.agents/skills`; core via user instruction in active VS Code profile | Agent Customizations → Instructions → user scope, apply to all files; inspect loaded references and skill listing in fresh chat |
-| Claude Desktop/Cowork | Manual skill upload if that mode/account supports it; otherwise profile/project instructions and relevant references | Verify on the actual mode; Claude Code adapter is not proof of Cowork/chat behavior |
+| Claude Desktop/Cowork | `./my-plugin` builds a `.plugin` from the same sources (manual install in Cowork); else manual skill upload if that mode/account supports it; otherwise profile/project instructions and relevant references | Verify on the actual mode; Claude Code adapter is not proof of Cowork/chat behavior |
 | ChatGPT web/app | Manual custom/project instructions and relevant profile/reference attachment | Verify actual surface; no claim local skills or filesystem sync applies to normal chat |
 
 ## Core for manual setup
