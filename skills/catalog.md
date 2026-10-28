@@ -14,6 +14,7 @@
 | EAS update/app-stores | Có trong kho; chỉ dùng khi task yêu cầu, làm rõ chi phí và hành động phát hành |
 | OpenSpec | Tích hợp dự án đã dùng; hỏi trước dự án chưa có |
 | Frontend-design | Khám phá UI sản phẩm cá nhân; tránh trùng skill thiết kế hiện có và lệch Figma |
+| Agent Reach (Panniantong, MIT) | Cho AI đọc/tìm web, YouTube, Reddit, Twitter... Chỉ đọc, không đăng. Cài trên Mac bằng prompt cho Claude Code: `Install Agent Reach: https://raw.githubusercontent.com/Panniantong/Agent-Reach/main/docs/install.md`. Skill do CLI tự cài/cập nhật (`agent-reach update`), không vendoring vào repo/plugin. Kênh cần login copy từ Chrome: dùng tài khoản phụ; key nhập trong terminal. Không cài gói PyPI `agent-reach`. |
 | NestJS best practices | Nhóm backend ưu tiên, tận dụng bản đã có; chỉ đọc rule phù hợp, spec/convention repo thắng |
 
 Nguồn tham khảo: github.com/vercel-labs/agent-skills; github.com/expo/skills; github.com/Fission-AI/OpenSpec; developers.figma.com/docs/figma-mcp-server/remote-server-installation/; github.com/anthropics/claude-code/tree/main/plugins/frontend-design.

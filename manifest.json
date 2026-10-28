@@ -92,6 +92,14 @@
       "source": "https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design",
       "mode": "manual",
       "status": "pending-audit"
+    },
+    {
+      "id": "agent-reach",
+      "source": "https://github.com/Panniantong/Agent-Reach",
+      "mode": "manual",
+      "status": "install-via-own-cli",
+      "license": "MIT",
+      "note": "Skill is generated and updated by its CLI (agent-reach setup/update); not vendored. Never install the PyPI package named agent-reach."
     }
   ]
 }
