@@ -11,8 +11,8 @@ Làm rõ mục tiêu và ràng buộc → khám phá phương hướng → tìm 
 1. Đọc phần liên quan, feature tương tự, spec và convention; xác định repo bị ảnh hưởng.
 2. Interview theo vòng ngắn: lựa chọn cụ thể, recommend có lý do; phản biện giả định và điểm thiếu.
 3. Thịnh chốt requirement và scope. Ý tưởng mở rộng nêu riêng, chưa đưa vào scope.
-4. Soạn spec/plan theo công cụ/format dự án; Thịnh duyệt. Có OpenSpec thì theo đúng workflow đó; chưa có thì hỏi trước khi đưa OpenSpec vào.
-5. Apply đúng requirement và convention sau lệnh thực hiện. Thịnh đổi ý: cập nhật hướng, chỉ rõ ảnh hưởng đáng kể và giữ phần vẫn phù hợp.
+4. Planner (Claude chat) soạn spec/plan theo công cụ/format dự án, gồm cả nội dung OpenSpec (phạm vi, thiết kế, mapping, contract, tasks), đưa Thịnh duyệt ngay trong chat. Có OpenSpec thì theo đúng workflow đó; chưa có thì hỏi trước khi đưa OpenSpec vào. Change mới đặt tên `my-store-step-NN-...`, không dùng `aiz-`.
+5. Builder (Claude Code qua my-dev-bridge) chỉ ghi file và implement đúng plan đã duyệt, không tự thiết kế; chưa duyệt thì không chạy mode=implement. Apply đúng requirement và convention sau lệnh thực hiện. Thịnh đổi ý: cập nhật hướng, chỉ rõ ảnh hưởng đáng kể và giữ phần vẫn phù hợp.
 6. Kiểm tra nhỏ nhất phù hợp, đối chiếu kết quả yêu cầu.
 7. Bàn giao: kết quả, thay đổi chính, kiểm tra đã làm và điểm chưa xác minh/vướng. Không thêm bước tiếp theo vô ích.
 
