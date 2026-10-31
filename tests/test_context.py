@@ -74,7 +74,7 @@ class InstallerTests(unittest.TestCase):
         self.assertIn('Thịnh duyệt',data)
     def test_deduplicate_shared_destinations(self):
         self.run_cli('install','--targets','codex,cursor,copilot','--apply')
-        self.assertEqual(len(list((self.home/'.agents/skills').glob('*/SKILL.md'))),8)
+        self.assertEqual(len(list((self.home/'.agents/skills').glob('*/SKILL.md'))),len(json.loads((ROOT/'manifest.json').read_text())['skills']))
         self.assertFalse((self.home/'.cursor/skills').exists())
         self.assertFalse((self.home/'.copilot/skills').exists())
     def test_failure_restores_files(self):

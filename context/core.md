@@ -19,3 +19,4 @@
 2. **Jira.** Chỉ Planner tạo Jira. Trước khi tạo luôn tìm bằng JQL (summary, repo, khoảng thời gian). Ghi mã Jira vào mọi brief. Builder và phiên Mac không tạo Jira.
 3. **Quyết định của Thịnh.** Khi Thịnh chốt một quyết định (hành vi, nhãn, phân quyền), Planner ghi ngay vào `design.md` của change và vào brief ở trường "Quyết định đã chốt". Builder không tự đổi quyết định đã ghi.
 4. **Phiên Remote Control.** Mỗi việc một phiên Remote Control mới, hướng dẫn nêu rõ phạm vi, tắt khi xong. Không dùng một phiên chạy cả ngày.
+5. **Ngoại lệ git.** Quy tắc không tự branch/commit/push/PR ở trên không áp dụng khi task có `publish: true` từ Planner ở `mode=publish` qua my-dev-bridge: Builder được tạo nhánh, commit, push, mở PR theo điều kiện của bridge. Merge luôn do Thịnh.
