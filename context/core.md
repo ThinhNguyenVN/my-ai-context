@@ -12,3 +12,10 @@
 - Bộ nhớ mới chỉ là đề xuất tới khi Thịnh duyệt. Duyệt lưu không đồng nghĩa cho phép commit/push hay đổi cấu hình.
 - Tra cứu theo nhu cầu: `profile/thinh.md` cho con người/ngữ cảnh; `workflows/working-together.md` cho research/feature/UI/test; `skills/catalog.md` cho chọn skill. Không đọc tất cả mỗi phiên.
 
+
+## Quy trình Planner/Builder
+
+1. **Một đầu mối giao việc.** Chỉ Planner nhận lệnh từ Thịnh và giao việc. Phiên Mac (Remote Control) chỉ làm khi Planner giao, kèm phạm vi rõ. Khi bridge đang có task trên một repo, bên khác chỉ đọc repo đó. Không dùng file khoá; nếu vẫn dẫm chân nhau thì Thịnh quyết định thêm.
+2. **Jira.** Chỉ Planner tạo Jira. Trước khi tạo luôn tìm bằng JQL (summary, repo, khoảng thời gian). Ghi mã Jira vào mọi brief. Builder và phiên Mac không tạo Jira.
+3. **Quyết định của Thịnh.** Khi Thịnh chốt một quyết định (hành vi, nhãn, phân quyền), Planner ghi ngay vào `design.md` của change và vào brief ở trường "Quyết định đã chốt". Builder không tự đổi quyết định đã ghi.
+4. **Phiên Remote Control.** Mỗi việc một phiên Remote Control mới, hướng dẫn nêu rõ phạm vi, tắt khi xong. Không dùng một phiên chạy cả ngày.
