@@ -24,6 +24,8 @@ Kiểm tra MCP và quyền truy cập → đọc đúng frame/context/screenshot
 
 Không đọc được Figma: kiểm tra kết nối trước, đề xuất nguồn thay thế nếu còn lỗi; không đoán rồi báo đã bám thiết kế. Đúng Figma gồm layout, spacing, typography, màu và trạng thái. Hive chỉ dùng nơi dự án đã dùng Hive. Skill thiết kế sáng tạo dùng cho khám phá UI, không kéo lệch Figma.
 
+Project mới hoặc feature cần visual direction mới (chưa có brand/palette/font/kit): đề xuất Thịnh chạy `/ui-ux-pro-max` trước khi thiết kế, không tự gọi. Feature trong kit/design system có sẵn thì bám kit.
+
 ## Kiểm chứng
 
 Lập checklist theo ảnh hưởng trên web desktop/mobile, iOS/Android. Chỉ kiểm tra platform liên quan. Tự chạy kiểm tra nhỏ phù hợp; hỏi trước bộ test rộng hoặc tốn tài nguyên. Được mở app/browser kiểm tra UI thuộc task đã chốt, dùng dữ liệu thử phù hợp. Không chạy baseline hoặc test lặp theo nghi thức; chạy thêm khi có thay đổi/lỗi/rủi ro chưa giải quyết.

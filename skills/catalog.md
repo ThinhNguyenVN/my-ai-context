@@ -16,6 +16,7 @@
 | Frontend-design | Khám phá UI sản phẩm cá nhân; tránh trùng skill thiết kế hiện có và lệch Figma |
 | Agent Reach (Panniantong, MIT) | Cho AI đọc/tìm web, YouTube, Reddit, Twitter... Chỉ đọc, không đăng. Cài trên Mac bằng prompt cho Claude Code: `Install Agent Reach: https://raw.githubusercontent.com/Panniantong/Agent-Reach/main/docs/install.md`. Skill do CLI tự cài/cập nhật (`agent-reach update`), không vendoring vào repo/plugin. Kênh cần login copy từ Chrome: dùng tài khoản phụ; key nhập trong terminal. Không cài gói PyPI `agent-reach`. |
 | NestJS best practices | Nhóm backend ưu tiên, tận dụng bản đã có; chỉ đọc rule phù hợp, spec/convention repo thắng |
+| UI/UX Pro Max (nextlevelbuilder/ui-ux-pro-max-skill) | Chọn visual direction (style, palette, font) khi kickoff project mới hoặc feature cần UI mới chưa có brand/kit; không dùng cho feature trong kit/design system có sẵn. Cài 2026-10-31 bằng `npx -y -p ui-ux-pro-max-cli uipro init --ai claude --global` (Thịnh tự chạy), không vendoring. Bộ 7 skill `ui-ux-pro-max`, `ui-styling`, `design`, `design-system`, `brand`, `banner-design`, `slides` đều khoá `disable-model-invocation: true`: AI không tự gọi, gặp điều kiện trên thì đề xuất Thịnh chạy `/ui-ux-pro-max`. Sau `uipro update --global` thêm lại dòng khoá. Cần Python 3. |
 
 Nguồn tham khảo: github.com/vercel-labs/agent-skills; github.com/expo/skills; github.com/Fission-AI/OpenSpec; developers.figma.com/docs/figma-mcp-server/remote-server-installation/; github.com/anthropics/claude-code/tree/main/plugins/frontend-design.
 
