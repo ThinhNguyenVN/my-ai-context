@@ -13,8 +13,9 @@ Làm rõ mục tiêu và ràng buộc → khám phá phương hướng → tìm 
 3. Thịnh chốt requirement và scope. Ý tưởng mở rộng nêu riêng, chưa đưa vào scope.
 4. Planner (Claude chat) soạn spec/plan theo công cụ/format dự án, gồm cả nội dung OpenSpec (phạm vi, thiết kế, mapping, contract, tasks), đưa Thịnh duyệt ngay trong chat. Có OpenSpec thì theo đúng workflow đó; chưa có thì hỏi trước khi đưa OpenSpec vào. Change mới đặt tên `my-store-step-NN-...`, không dùng `aiz-`.
 5. Builder (Claude Code qua my-dev-bridge) chỉ ghi file và implement đúng plan đã duyệt, không tự thiết kế; chưa duyệt thì không chạy mode=implement. Apply đúng requirement và convention sau lệnh thực hiện. Thịnh đổi ý: cập nhật hướng, chỉ rõ ảnh hưởng đáng kể và giữ phần vẫn phù hợp.
-6. Kiểm tra nhỏ nhất phù hợp, đối chiếu kết quả yêu cầu.
-7. Bàn giao: kết quả, thay đổi chính, kiểm tra đã làm và điểm chưa xác minh/vướng. Không thêm bước tiếp theo vô ích.
+6. Tự review diff và smoke test nhỏ nhất phù hợp, đối chiếu kết quả yêu cầu.
+7. Pass thì archive OpenSpec change, commit, push branch feature và mở PR để Thịnh review và merge. Fail hoặc lệch requirement thì sửa hoặc báo, chưa mở PR.
+8. Bàn giao: link PR, kết quả, thay đổi chính, kiểm tra đã làm và điểm chưa xác minh/vướng. Không thêm bước tiếp theo vô ích.
 
 Task nhỏ rõ có thể làm ngay. Task gấp rút ngắn hỏi/plan, giữ quyết định quan trọng và kiểm tra rủi ro. Convention có vấn đề: phản biện, chưa tự thay đổi. Ticket/Figma/code mâu thuẫn: nêu điểm lệch, cách hiểu và câu hỏi cần xác nhận; chưa tự quyết hành vi sản phẩm.
 
@@ -38,4 +39,4 @@ Báo platform đã kiểm tra, kết quả và phần chưa xác minh; không co
 
 ## Cập nhật bộ nhớ
 
-Chỉ đề xuất điều có giá trị lâu dài → Thịnh duyệt → lưu thay đổi cục bộ → commit/push khi được yêu cầu rõ → máy khác nhận bản đã push. Không tự đề xuất bài học mỗi phiên. Đồng bộ nội dung đã duyệt tự động; đổi cấu hình công cụ cần cho phép. Lỗi/xung đột báo ngắn, giữ bản tốt gần nhất và tiếp tục phần không bị ảnh hưởng.
+Chỉ đề xuất điều có giá trị lâu dài → Thịnh duyệt → lưu thay đổi cục bộ → commit/push thẳng master repo my-ai-context → máy khác nhận bản đã push. Không tự đề xuất bài học mỗi phiên. Đồng bộ nội dung đã duyệt tự động; đổi cấu hình công cụ cần cho phép. Lỗi/xung đột báo ngắn, giữ bản tốt gần nhất và tiếp tục phần không bị ảnh hưởng.

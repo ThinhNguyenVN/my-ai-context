@@ -8,7 +8,7 @@ AI hiểu Thịnh và cộng tác nhất quán giữa máy cá nhân/công ty, g
 
 Profile/rules/workflows/skill catalog, quản lý source/patch/version, installer cập nhật/gỡ/rollback, đồng bộ nội dung đã duyệt, kiểm chứng hành vi. Hỗ trợ Claude Code, Cursor, Codex desktop, Claude Desktop/Cowork, ChatGPT web/app, Copilot VS Code. Chat surface và code agent là adapter khác nhau; OpenCode có thể mở rộng sau, chưa bắt buộc bản đầu.
 
-Không sao chép code/spec/dữ liệu nội bộ hay trạng thái milestone project. Cho phép mô tả khái quát repo công ty đã xác nhận. Không triển khai/cài ở giai đoạn draft, không commit/push tự động. Backend mục tiêu NestJS: catalog hỗ trợ API contract, data integrity, security và testing/debugging, nạp theo task. Không áp generic architecture/auth/ORM trái convention và spec dự án.
+Không sao chép code/spec/dữ liệu nội bộ hay trạng thái milestone project. Cho phép mô tả khái quát repo công ty đã xác nhận. Không triển khai/cài ở giai đoạn draft. Backend mục tiêu NestJS: catalog hỗ trợ API contract, data integrity, security và testing/debugging, nạp theo task. Không áp generic architecture/auth/ORM trái convention và spec dự án.
 
 ## Nạp context và token
 
@@ -26,13 +26,13 @@ Mỗi adapter ghi tên surface/version, nơi cài, cấp áp dụng, load mode (
 
 ## Đồng bộ
 
-Duyệt profile/rule mới cho phép lưu, chưa cho phép Git. Commit/push cần yêu cầu. Đồng bộ tự động chỉ bản đã push và đã duyệt; không auto-merge khi local có sửa. Đổi global config cần cho phép riêng. Dùng last-known-good khi offline/lỗi; báo khi actionable, không status spam. Cơ chế lịch/hook chọn sau khi kiểm chứng nhu cầu, chưa tạo automation.
+Duyệt profile/rule mới cho phép lưu, commit và push thẳng master của repo này. Đồng bộ tự động chỉ bản đã push và đã duyệt; không auto-merge khi local có sửa. Đổi global config cần cho phép riêng. Dùng last-known-good khi offline/lỗi; báo khi actionable, không status spam. Cơ chế lịch/hook chọn sau khi kiểm chứng nhu cầu, chưa tạo automation.
 
 ## Acceptance
 
 - Mỗi surface có trạng thái verified/manual/unavailable, không quảng cáo coverage chưa thử.
 - Phiên mới nhận core đúng version và truy xuất đúng tài liệu cần; đo phần core thực nạp.
-- Câu hỏi phân tích không tạo code; làm đi thực hiện scope chốt; không branch/commit/push/PR khi chưa rõ quyền.
+- Câu hỏi phân tích không tạo code; làm đi thực hiện scope chốt; requirement chưa rõ thì interview; plan đã duyệt và kiểm tra pass thì được branch/commit/push/mở PR, không merge.
 - Feature theo workflow/convention; Figma đọc context trước và không giả vờ khi mất kết nối.
 - Test chọn platform/rủi ro, không chạy rộng mặc định. Expo chỉ kích hoạt đúng stack.
 - Đổi máy nhận cùng bản đã push; offline không mất last-known-good; local edit không bị ghi đè.

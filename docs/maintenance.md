@@ -1,6 +1,6 @@
 # Hướng dẫn cho AI bảo trì my-ai-context
 
-Dùng primary checkout trên máy hiện tại, không tạo branch/worktree/clone phụ. Từ project khác vẫn có thể cập nhật repo này khi có quyền. Luôn đọc core và phần workflow liên quan, không nạp hết profile.
+Dùng primary checkout trên máy hiện tại, không tạo branch/worktree/clone phụ; repo này commit thẳng master. Từ project khác vẫn có thể cập nhật repo này khi có quyền. Luôn đọc core và phần workflow liên quan, không nạp hết profile.
 
 ## Thêm/update
 
@@ -10,7 +10,7 @@ Dùng primary checkout trên máy hiện tại, không tạo branch/worktree/clo
 4. Nguồn bên thứ ba cần LICENSE, version/commit, checksum và patch log. Giữ chỉnh sửa Expo bỏ feedback. Không tự update latest hàng loạt.
 5. Preview bằng python3 bin/context update --dry-run. Review file/path/conflict; không force/reset/stash hay sửa riêng bản cài.
 6. Khi được phép, apply và kiểm tra status; xác minh nạp trong phiên mới. Chỉ test cần thiết.
-7. Git commit/push/PR cần yêu cầu rõ, không suy ra từ duyệt nội dung. Không hỏi lại hành động đã được cho phép.
+7. Khi Thịnh đã duyệt nội dung và apply/kiểm tra xong: commit và push thẳng master. Không force push. Không hỏi lại hành động đã được cho phép.
 
 ## Giới hạn và phục hồi
 

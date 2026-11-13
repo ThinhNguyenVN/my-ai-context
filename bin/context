@@ -128,7 +128,7 @@ def build_plugin(manifest, out):
     core = (core.replace("`profile/thinh.md`", "the my-thinh-context skill")
                 .replace("`workflows/working-together.md`", "the my-feature-workflow, my-research, my-figma-ui and my-risk-based-verification skills")
                 .replace("`skills/catalog.md`", "the skill list"))
-    desc = json.dumps("Core collaboration rules for working with Thịnh. Load at the start of any conversation with Thịnh (tone, language, discussion vs implement, no commit/branch, minimal testing).", ensure_ascii=False)
+    desc = json.dumps("Core collaboration rules for working with Thịnh. Load at the start of any conversation with Thịnh (tone, language, discussion vs implement, interview before unclear work, PR after approved plan, minimal testing).", ensure_ascii=False)
     files["skills/my-core/SKILL.md"] = f"---\nname: my-core\ndescription: {desc}\n---\n\n{core}\n".encode()
     for skill in manifest["skills"]:
         source = ROOT / skill["path"]

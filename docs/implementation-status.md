@@ -19,7 +19,7 @@
 - Cursor/Copilot always-on core via profile UI; desktop/chat integrations remain manual until tested in actual surface.
 - Figma official plugin installation/authentication and frame test; frontend-design comparison/activation.
 - Full third-party source/license/version audit and managed import. Current 14 technical bundles remain in place; React differs, most local bundles lack LICENSE copies. MIT license files found upstream for Expo and web-interface-guidelines; root license endpoints for Vercel agent-skills and NestJS returned not found. Do not infer no license from that alone; inspect upstream metadata before import.
-- Source synchronization: no background automation or implicit Git pull/merge. Remote still has no pushed playbook content; commit/push requires request.
+- Source synchronization: no background automation or implicit Git pull/merge. Since v0.1.3 approved changes to this repo are committed and pushed directly to master; project repos go through branch + PR, merge by Thịnh.
 - Company Mac/Copilot runtime not accessed; plan requires separate setup there.
 - Core token measurement unavailable in bundled Python (no tiktoken); no token cap claim yet.
 

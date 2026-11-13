@@ -20,7 +20,7 @@
 
 Nguồn tham khảo: github.com/vercel-labs/agent-skills; github.com/expo/skills; github.com/Fission-AI/OpenSpec; developers.figma.com/docs/figma-mcp-server/remote-server-installation/; github.com/anthropics/claude-code/tree/main/plugins/frontend-design.
 
-Trước vendoring: đọc toàn bộ file liên quan, kiểm tra script/network/chi phí, xác định commit và LICENSE; lưu checksum, patch địa phương và trigger. Không dùng ngày/commit trong PDF như xác nhận phiên bản thực tế đã cài. Không cài CLI tạo branch/PR hoặc tự động commit trái rules.
+Trước vendoring: đọc toàn bộ file liên quan, kiểm tra script/network/chi phí, xác định commit và LICENSE; lưu checksum, patch địa phương và trigger. Không dùng ngày/commit trong PDF như xác nhận phiên bản thực tế đã cài. Không cài CLI tự merge hoặc push thẳng nhánh mặc định trái rules.
 
 ## Nhóm backend/NestJS bổ sung — DRAFT
 

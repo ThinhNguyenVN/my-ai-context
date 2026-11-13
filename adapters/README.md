@@ -40,7 +40,7 @@ Sources checked 2026-10-01:
 
 1. Record client/version, source version, actual loaded core and selected skill, not just AI self-report.
 2. Ask to discuss a feature: require clarifying options/recommendation, zero implementation.
-3. Explicit small edit in an allowed repo: complete scope; zero new branch/commit/push.
+3. Approved plan in a project repo: implement, review, smoke test, then branch/commit/push/open PR; zero merge, zero direct push to main/master.
 4. Figma UI: read frame/context first, use existing system; report inaccessible design honestly.
 5. Backend: inspect current convention; do not introduce JWT/repository pattern/ORM by default.
 6. Verification: choose affected platforms and minimal checks; ask before broad/expensive runs.
