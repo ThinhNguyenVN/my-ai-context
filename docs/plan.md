@@ -1,8 +1,8 @@
 # Implementation plan — DRAFT
 
-Không ước lượng thời gian. Phụ thuộc theo thứ tự. Thịnh duyệt spec/plan trước triển khai; từng hành động Git/global config có quyền riêng.
+Không ước lượng thời gian. Phụ thuộc theo thứ tự. Thịnh duyệt spec/plan trước triển khai; đổi global config có quyền riêng. Git theo core mục 5.
 
-## P0 — Chốt bản nháp (hiện tại)
+## P0 — Chốt bản nháp (xong)
 
 Profile/core/workflows/catalog/inventory/spec/plan được soạn. Thịnh xem hiểu đúng chưa. Không bắt duyệt lại từng câu interview. Chỉ hỏi khi mâu thuẫn ảnh hưởng thiết kế.
 
@@ -24,11 +24,11 @@ Task nhỏ đại diện: research chưa implement, feature convention, Figma + 
 
 ## P5 — Đồng bộ và máy công ty
 
-Commit/push khi được yêu cầu. Chọn cơ chế sync nhẹ sau pilot. Kiểm kê máy công ty chỉ khi truy cập được; không remote đoán. Thiết lập path riêng, giữ cấu hình công ty, kết nối Claude và Copilot VS Code, thử cùng acceptance. Chat surfaces manual nếu không có hỗ trợ sync phù hợp.
+Chọn cơ chế sync nhẹ sau pilot. Kiểm kê máy công ty chỉ khi truy cập được; không remote đoán. Thiết lập path riêng, giữ cấu hình công ty, kết nối Claude và Copilot VS Code, thử cùng acceptance. Chat surfaces manual nếu không có hỗ trợ sync phù hợp.
 
 ## P6 — Bảo trì
 
-Đề xuất bộ nhớ có giá trị; duyệt → lưu → commit/push có yêu cầu → đồng bộ. Khi project mới: kiểm tra stack/skill, đề xuất thiếu trước khi bắt đầu. Update dependency/plugin qua repo canonical: AI đề xuất/audit, Thịnh duyệt nguồn/version/patch, script preview rồi apply có quyền. Không sửa độc lập bản cài mỗi máy, không dùng update script để tự nâng upstream hoặc commit/push. Update có source pin, diff và Thịnh duyệt. Không nhắc bài học hay upgrade mỗi phiên.
+Đề xuất bộ nhớ có giá trị; duyệt → lưu → commit/push thẳng master → đồng bộ. Khi project mới: kiểm tra stack/skill, đề xuất thiếu trước khi bắt đầu. Update dependency/plugin qua repo canonical: AI đề xuất/audit, Thịnh duyệt nguồn/version/patch, script preview rồi apply có quyền. Không sửa độc lập bản cài mỗi máy, không dùng update script để tự nâng upstream hoặc chạy Git. Update có source pin, diff và Thịnh duyệt. Không nhắc bài học hay upgrade mỗi phiên.
 
 ## Các quyết định kỹ thuật còn mở (để P1 giải quyết bằng chứng)
 

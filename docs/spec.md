@@ -8,7 +8,7 @@ AI hiểu Thịnh và cộng tác nhất quán giữa máy cá nhân/công ty, g
 
 Profile/rules/workflows/skill catalog, quản lý source/patch/version, installer cập nhật/gỡ/rollback, đồng bộ nội dung đã duyệt, kiểm chứng hành vi. Hỗ trợ Claude Code, Cursor, Codex desktop, Claude Desktop/Cowork, ChatGPT web/app, Copilot VS Code. Chat surface và code agent là adapter khác nhau; OpenCode có thể mở rộng sau, chưa bắt buộc bản đầu.
 
-Không sao chép code/spec/dữ liệu nội bộ hay trạng thái milestone project. Cho phép mô tả khái quát repo công ty đã xác nhận. Không triển khai/cài ở giai đoạn draft. Backend mục tiêu NestJS: catalog hỗ trợ API contract, data integrity, security và testing/debugging, nạp theo task. Không áp generic architecture/auth/ORM trái convention và spec dự án.
+Không sao chép code/spec/dữ liệu nội bộ hay trạng thái milestone project. Cho phép mô tả khái quát repo công ty đã xác nhận. Backend mục tiêu NestJS: catalog hỗ trợ API contract, data integrity, security và testing/debugging, nạp theo task. Không áp generic architecture/auth/ORM trái convention và spec dự án.
 
 ## Nạp context và token
 

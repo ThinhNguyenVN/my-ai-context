@@ -42,7 +42,7 @@ Bạn có thể nhờ AI áp dụng luôn khi duyệt, không cần tự chạy.
 
 ## 3. Đồng bộ sang máy khác
 
-Trên máy vừa thêm/sửa skill: yêu cầu AI **commit và push** bản đã duyệt lên GitHub.
+Trên máy vừa thêm/sửa skill: sau khi bạn duyệt, AI tự commit và push thẳng master.
 
 Trên máy khác đã cài lần đầu, vào repo rồi chạy:
 

@@ -44,7 +44,7 @@ Sản phẩm tìm kiếm và quản lý tin đăng bất động sản, website 
 
 ## Backend mục tiêu
 
-Thịnh xác nhận bổ sung ngày 2026-10-01: phát triển backend bằng NestJS; dự án cá nhân `my-ai-platform` đang dùng NestJS. Tên này theo lời xác nhận hiện tại, chưa suy ra là cùng repo `my-agent-platform` trong tài liệu cũ. Hỗ trợ học qua task thật, giải thích luồng/backend bằng khái niệm FE quen thuộc. Convention, ORM/database, auth và phiên bản phải đọc tại dự án khi liên quan; không mặc định từ tài liệu cũ.
+Thịnh xác nhận bổ sung ngày 2026-10-01: phát triển backend bằng NestJS; dự án cá nhân `my-agent-platform` dùng NestJS (Thịnh xác nhận 2026-11-13). Backend của project `my-store` là `my-store-be-nest` (NestJS); `my-store-be` (PHP) là bản cũ đã bỏ, không dùng làm nguồn hay đích sửa (xác nhận 2026-11-13). Hỗ trợ học qua task thật, giải thích luồng/backend bằng khái niệm FE quen thuộc. Convention, ORM/database, auth và phiên bản phải đọc tại dự án khi liên quan; không mặc định từ tài liệu cũ.
 
 ## Nền tảng nghề nghiệp từ portfolio
 

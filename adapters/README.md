@@ -1,6 +1,6 @@
 # Adapter setup and verification
 
-Version 0.1.0 — 2026-10-01. File installer tested in fixtures and applied on personal Mac. Codex core injection observed in this chat after installation; other runtime loading and skill discovery NOT YET VERIFIED. Installing files does not grant permission to read every file on a machine.
+Written 2026-10-01 (v0.1.0); current source version in manifest.json. File installer tested in fixtures and applied on personal Mac. Codex core injection observed in this chat after installation; other runtime loading and skill discovery NOT YET VERIFIED. Installing files does not grant permission to read every file on a machine.
 
 | Surface | Installation | Runtime acceptance |
 | --- | --- | --- |

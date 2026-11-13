@@ -1,6 +1,6 @@
 # Skill/plugin catalog — DRAFT
 
-Được chấp thuận đưa vào plan, chưa cài/đổi cấu hình. Skills hướng dẫn quy trình; MCP/plugin cung cấp công cụ. Tồn tại trên đĩa không chứng minh đã được app nạp.
+Skill my-* trong manifest được cài qua bin/context; skill bên thứ ba ghi cách cài riêng. Skills hướng dẫn quy trình; MCP/plugin cung cấp công cụ. Tồn tại trên đĩa không chứng minh đã được app nạp.
 
 | Nhóm | Quyết định |
 | --- | --- |
@@ -22,22 +22,17 @@ Nguồn tham khảo: github.com/vercel-labs/agent-skills; github.com/expo/skills
 
 Trước vendoring: đọc toàn bộ file liên quan, kiểm tra script/network/chi phí, xác định commit và LICENSE; lưu checksum, patch địa phương và trigger. Không dùng ngày/commit trong PDF như xác nhận phiên bản thực tế đã cài. Không cài CLI tự merge hoặc push thẳng nhánh mặc định trái rules.
 
-## Nhóm backend/NestJS bổ sung — DRAFT
+## Nhóm backend/NestJS
 
-Được yêu cầu bổ sung ngày 2026-10-01; chưa cài và chưa tạo SKILL.md. Skills chung tầng user, chỉ bật theo task backend. Các tên custom bên dưới là thiết kế đề xuất, không phải package đã tìm thấy.
+Skill user-level, chỉ bật theo task backend NestJS.
 
 | Skill | Nội dung và điều kiện |
 | --- | --- |
-| `nestjs-best-practices` (đã có) | Module/provider/DI, lỗi, validation, hiệu năng. Bản local metadata 1.2.0, MIT, author Kadajett. Cần audit references/source trước ghim; không áp cứng feature-module, repository pattern hay JWT nếu repo khác convention. |
-| `backend-api-contract` (custom) | Làm rõ input/output, validation, lỗi, pagination, quyền truy cập và compatibility với FE trước code; theo transport/contract dự án, không tự thêm REST/versioning. |
-| `backend-data-integrity` (custom) | Schema/query, transaction, migration, idempotency/concurrency và phân tách dữ liệu khi liên quan; đọc ORM/DB hiện có, không chọn công nghệ thay Thịnh. |
-| `backend-security-review` (custom) | Review auth/authz, kiểm tra quyền theo tài nguyên, input, secret/log nhạy cảm và dependency bên ngoài theo scope; không tự chọn JWT hoặc thêm thư viện auth. |
-| `backend-testing-and-debugging` (custom) | Trace request → controller/service → DB/tool, chọn unit/integration/e2e tối thiểu theo rủi ro; kiểm tra contract, quyền và tính toàn vẹn khi đổi hành vi. Không baseline/bộ test rộng mặc định. |
-| Prisma official skills (có điều kiện) | Chỉ chọn skill Prisma Client/CLI phù hợp nếu dự án xác nhận dùng Prisma; chưa chọn managed Prisma service, không cài toàn bộ registry. |
+| `nestjs-best-practices` (bên thứ ba) | Module/provider/DI, lỗi, validation, hiệu năng. Metadata 1.2.0, MIT, author Kadajett; chưa audit hết references. Không áp cứng feature-module, repository pattern hay JWT nếu repo khác convention. |
+| `my-backend-review` (custom, đã thêm nguồn) | Gộp API contract, data integrity, security và testing/debugging (references api/data/security/testing). Theo convention repo, không tự chọn transport/ORM/auth. |
+| Prisma official skills (có điều kiện) | Chỉ khi dự án dùng Prisma; không cài toàn bộ registry. |
 
-Học backend: áp dụng cách giải thích trong profile, không tạo một skill dài lặp profile. Có thể gộp các custom skill khi audit thấy trigger trùng; không nạp cả nhóm mỗi task.
-
-Nguồn NestJS/Prisma: https://github.com/Kadajett/agent-nestjs-skills ; https://docs.nestjs.com/fundamentals/testing ; https://docs.nestjs.com/security/authentication ; https://www.prisma.io/docs/ai/tools/skills . Dùng để xây/audit, không giả là các package custom đã tồn tại.
+Nguồn: https://github.com/Kadajett/agent-nestjs-skills ; https://docs.nestjs.com/fundamentals/testing ; https://docs.nestjs.com/security/authentication ; https://www.prisma.io/docs/ai/tools/skills .
 
 ## Nhóm Python/FastAPI — 2026-10-01
 

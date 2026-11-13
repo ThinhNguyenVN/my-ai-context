@@ -1,4 +1,4 @@
-# Implementation status — 2026-10-01
+# Implementation status — updated 2026-11-13
 
 ## Implemented and checked
 
@@ -7,13 +7,13 @@
 - bin/context: status, install, update, uninstall, rollback; dry-run default, explicit apply, backup/history/checksum/lock, unmanaged/drift/symlink refusal, transactional recovery, shared destinations.
 - README update workflow works from any project but targets the primary checkout.
 - 12 fixture checks passed: preview no writes, preservation/idempotency/uninstall, drift atomic refusal, unmanaged/symlink refusal, rollback incremental/update/uninstall, override refusal, reference rendering, shared-root deduplication, write failure restoration, writer lock.
-- Thịnh approved the concrete 38-file preview. Applied on personal Mac: Claude global core + local skill copies; Codex global core + shared skills for Codex/Cursor/Copilot. Status: 38 managed files, zero drift, zero pending source changes. No Git operations performed.
+- Thịnh approved the concrete 38-file preview. Applied on personal Mac: Claude global core + local skill copies; Codex global core + shared skills for Codex/Cursor/Copilot. Status: 38 managed files, zero drift, zero pending source changes. (Git operations at that stage: none.)
 - Codex current session subsequently received the installed AGENTS.md core v0.1.0 as instruction context. This verifies core injection on this surface; the current session skill catalog also subsequently lists all 8 my-* skills. Core/catalog discovery verified here; full behavioral pilot remains unverified.
+
+- v0.1.4 applied on personal Mac via `bin/context update --apply` (Claude + Codex core, all manifest my-* skills incl. my-code-review, my-code-conventions, my-backend-review, my-python-backend); zero conflicts. Pushed to master.
 
 ## Pending, not represented as completed
 
-- `my-code-review` source now requires a brief PR summary, evidence-based strengths before findings, assesses PR feedback and reports before code changes/resolution, and requires explicit user request before running unit/e2e or other test suites. Installer/rendering behavior for this update has not been run.
-- `my-code-conventions` added to the source manifest and catalog. Source registration is present; installer/rendering behavior for the new skill has not been run in this change.
 
 - Fresh-session skill discovery and behavioral pilot in each client; Codex core injection already observed. Claude core file installed but runtime loading not yet observed.
 - Cursor/Copilot always-on core via profile UI; desktop/chat integrations remain manual until tested in actual surface.

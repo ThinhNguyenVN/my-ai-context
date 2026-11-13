@@ -1,5 +1,7 @@
 # Kiểm kê Mac cá nhân — 2026-10-01 — DRAFT
 
+> Snapshot lịch sử trước khi cài; không phản ánh trạng thái hiện tại. Trạng thái hiện tại: docs/implementation-status.md.
+
 Phạm vi: instruction toàn cục, danh sách skill user, nội dung profile kỹ thuật cũ, metadata cấu hình và so sánh SKILL.md của 14 skill liên quan. Không đọc chat history, code công ty, token hay credential. Metadata MCP chỉ lấy tên server. Đây chưa phải audit nội dung mọi plugin/skill hay kiểm chứng runtime.
 
 ## Quan sát trực tiếp
@@ -26,7 +28,7 @@ Phạm vi: instruction toàn cục, danh sách skill user, nội dung profile k�
 | Tên repo và mục tiêu side project cũ | Dùng tên/mục tiêu vừa xác nhận; không đưa chi tiết project riêng vào lõi |
 | Phân vai công cụ cố định | Không áp mặc định; hỗ trợ cùng workflow giữa AI |
 | Unit Jest, Cucumber/E2E, Conventional Commits, employer/team cũ | Chưa xác nhận lại; tra cứu tại dự án khi liên quan |
-| Tiếng Việt, convention, đơn giản, không tự commit/branch | Giữ, làm rõ quyền theo interview |
+| Tiếng Việt, convention, đơn giản | Giữ. Rule cũ không tự commit/branch đã thay từ v0.1.3: xem core mục 5 |
 
 ## Giới hạn và việc cần kiểm chứng
 
